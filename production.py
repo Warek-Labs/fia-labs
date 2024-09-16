@@ -407,14 +407,40 @@ def _simplify_or(branches):
 # ==============================================================================
 # ==============================================================================
 
-def is_hypothesis(rules: list[IF], target_string: str) -> bool:
+def is_hypothesis(rules: list[IF], datum: str) -> bool:
+    """checks if the given datum is hypothesis, if it is not an antecedent of any rule"""
     for condition in rules:
-        and_conditions = condition.antecedent()
+        antecedent = condition.antecedent()
 
-        if target_string in and_conditions:
-            return False
+        for leaf in antecedent:
+            if match(leaf, datum):
+                return False
 
     return True
+
+
+def get_parent_facts(rules: list[IF], fact: str) -> list[str]:
+    """returns the branch of parents up to the hypothesis from the current fact"""
+    if fact is None:
+        return []
+
+    new_parents = [fact]
+    parents = []
+
+    # iteratively search for each fact's parents
+    while new_parents:
+        parents += new_parents
+        new_parents = []
+        for condition in rules:
+            antecedent = condition.antecedent()
+            consequent = populate(condition.consequent()[0], { 'x': 'X' })
+
+            for leaf in antecedent:
+                for p in parents:
+                    if match(leaf, p) and consequent not in parents:
+                        new_parents.append(consequent)
+
+    return parents
 
 
 ### We've tried to keep the functions you will need for
@@ -423,7 +449,7 @@ def is_hypothesis(rules: list[IF], target_string: str) -> bool:
 ###
 ### >>> import production
 ### >>> help(production)
-def forward_chain(rules: list[IF], data: list[Question], apply_only_one=False, verbose=False):
+def forward_chain(rules: list[IF], data: list[Question]):
     """
     Apply a list of IF-expressions (rules) through a set of data
     in order.  Return the modified data set that results from the
@@ -436,29 +462,51 @@ def forward_chain(rules: list[IF], data: list[Question], apply_only_one=False, v
     DELETE rules will act differently.
     """
 
-    # list of initial facts
-    facts = []
-    # list of facts that will be scrambled with intermediary facts and hypothesis
-    queried_data = []
+    non_intermediate_facts = []
+    intermediate_facts = dict()
+    all_facts = []
+    facts_for_possible_parents = []
+    hypothesis = None
+    is_first_question = True
 
     for q in data:
-        # if data contains an incompatible datum with the current question
-        if set(queried_data) & set(q.incompatible_with):
-            continue
+        all_possible_parents = []
+        for f in facts_for_possible_parents:
+            all_possible_parents += get_parent_facts(rules, f)
+
+        # if hypothesis was deduced, stop
+        if hypothesis:
+            break
 
         if q.type == QuestionType.YES_NO:
+            parents = get_parent_facts(rules, q.response)
+
+            if not is_first_question and (
+                set(all_facts) & set(parents) or not set(all_possible_parents) & set(parents)):
+                continue
+
             res = input(q.question + ' (Yes/No) ').lower()
             if res == 'y' or res == 'yes':
-                queried_data.append(q.response)
-                facts.append(q.response)
+                all_facts.append(q.response)
+                facts_for_possible_parents.append(q.response)
+                non_intermediate_facts.append(q.response)
         elif q.type == QuestionType.INPUT:
             res = input(q.question + ' ')
             # if response is empty or None, we assume there is no data
             if res:
                 fact = re.sub('%', res, q.response)
-                queried_data.append(fact)
-                facts.append(fact)
+                all_facts.append(fact)
+                facts_for_possible_parents.append(fact)
+                non_intermediate_facts.append(fact)
         elif q.type == QuestionType.MULTIPLE_CHOICE:
+            parents = []
+            for response in q.response.values():
+                parents += get_parent_facts(rules, response)
+
+            if not is_first_question and (
+                set(all_facts) & set(parents) or not set(all_possible_parents) & set(parents)):
+                continue
+
             # will loop while the selected index in not in dict range
             is_valid_range = True
             while True:
@@ -476,7 +524,11 @@ def forward_chain(rules: list[IF], data: list[Question], apply_only_one=False, v
                     if index != len(q.response) - 1:
                         print(end='or ')
 
-                res = int(input())
+                res = input()
+                if not res.isdigit():
+                    is_valid_range = False
+                    continue
+                res = int(res)
 
                 if not (0 <= res < len(q.response)):
                     is_valid_range = False
@@ -484,21 +536,64 @@ def forward_chain(rules: list[IF], data: list[Question], apply_only_one=False, v
 
                 # if the value is None, skip it
                 if values[res]:
-                    queried_data.append(values[res])
-                    facts.append(values[res])
+                    all_facts.append(values[res])
+                    facts_for_possible_parents.append(values[res])
+                    non_intermediate_facts.append(values[res])
 
                 break
 
+        # forward chaining part
         old_data = ()
 
-        while set(old_data) != set(queried_data):
-            old_data = list(queried_data)
+        while set(old_data) != set(all_facts) and not hypothesis:
+            old_data = list(all_facts)
             for condition in rules:
-                queried_data = list(condition.apply(queried_data, apply_only_one, verbose))
-                if set(queried_data) != set(old_data):
-                    break
+                all_facts = list(condition.apply(all_facts, True, False))
+                diff = list(set(all_facts) - set(old_data))
+                if diff:
+                    diff_leaf = diff[0]
+                    intermediate_facts[diff_leaf] = condition.antecedent()
+                    if is_hypothesis(rules, diff_leaf):
+                        hypothesis = diff_leaf
+                        break
 
-    return queried_data, facts
+                    # recalculate all possible parents
+                    facts_for_possible_parents.append(diff_leaf)
+                    for leaf in condition.antecedent():
+                        for f in facts_for_possible_parents:
+                            if populate(leaf, { 'x': 'X' }) == f:
+                                facts_for_possible_parents.remove(f)
+
+                    break
+        is_first_question = False
+
+    print('====================================================')
+
+    if hypothesis is None:
+        print('Could not deduce hypothesis')
+    else:
+        print(f'Hypothesis: {hypothesis}')
+
+    # facts that deduce intermediate facts
+    used_facts: list[str] = []
+    for intermediate_fact in intermediate_facts:
+        fact_str = []
+        for leaf in intermediate_facts[intermediate_fact]:
+            populated = populate(leaf, { 'x': 'X' })
+            used_facts.append(populated)
+            fact_str.append(populated)
+
+        delimiter = 'or'
+        if issubclass(type(intermediate_facts[intermediate_fact]), AND):
+            delimiter = ' and '
+
+        print(f'{intermediate_fact} because {delimiter.join(fact_str)}')
+
+    # facts that did not deduce any intermediate facts
+    print('Other facts:')
+    remaining_facts = list(set(non_intermediate_facts) - set(used_facts))
+    for f in remaining_facts:
+        print(f)
 
 
 def backward_chain(rules, hypothesis, verbose=False):

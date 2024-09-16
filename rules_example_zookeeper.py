@@ -1,4 +1,4 @@
-from production import IF, AND, THEN
+from production import IF, AND, THEN, OR
 from app_types import QuestionType, Question
 
 ZOOKEEPER_RULES: list[IF] = [
@@ -118,37 +118,37 @@ ZOOKEEPER_DATA = [
         type=QuestionType.YES_NO,
         question="Does it fly?",
         response="X flies",
-        incompatible_with=[RES_MAMMAL, RES_BIRD]
+        incompatible_with=[RES_MAMMAL]
     ),
     Question(
         type=QuestionType.YES_NO,
         question="Does it lay eggs?",
         response="X lays eggs",
-        incompatible_with=[RES_MAMMAL, RES_BIRD]
+        incompatible_with=[RES_MAMMAL]
     ),
     Question(
         type=QuestionType.YES_NO,
         question="Does it have pointed teeth?",
         response="X has pointed teeth",
-        incompatible_with=[RES_BIRD, RES_CARNIVORE]
+        incompatible_with=[RES_BIRD]
     ),
     Question(
         type=QuestionType.YES_NO,
         question="Does it have claws?",
         response="X has claws",
-        incompatible_with=[RES_BIRD, RES_CARNIVORE]
+        incompatible_with=[RES_BIRD]
     ),
     Question(
         type=QuestionType.YES_NO,
         question="Does it have forward-pointing eyes?",
         response="X has forward-pointing eyes",
-        incompatible_with=[RES_BIRD, RES_CARNIVORE]
+        incompatible_with=[RES_BIRD]
     ),
     Question(
         type=QuestionType.YES_NO,
         question="Does it have hoofs?",
         response="X has hoofs",
-        incompatible_with=[RES_EATS_MEAT, RES_BIRD, RES_CARNIVORE]
+        incompatible_with=[RES_EATS_MEAT, RES_BIRD]
     ),
     Question(
         type=QuestionType.YES_NO,

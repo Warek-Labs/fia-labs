@@ -1,6 +1,8 @@
-from production import forward_chain, populate, IF, AND, THEN, RuleExpression, is_hypothesis
+from production import *
 from rules_example_zookeeper import ZOOKEEPER_RULES, ZOOKEEPER_DATA
 import re
+
+from utils import islist
 
 if __name__ == '__main__':
     rules = ZOOKEEPER_RULES
@@ -11,27 +13,9 @@ if __name__ == '__main__':
         res = input().lower()
 
         if res == 'f' or res == 'forward' or res == 'forward chaining':
-            chain, facts = forward_chain(
-                rules=rules,
-                data=data,
-                apply_only_one=False,
-                verbose=False
-            )
-
-            hypothesis = None
-
-            for f in chain:
-                if is_hypothesis(rules, re.sub("^X", "(?x)", f)):
-                    hypothesis = f
-                    break
-
-            inter_facts = list(set(chain) - set(facts) - { hypothesis })
-
-            print(facts)
-            print(inter_facts)
-            print(hypothesis)
-
-            break
-
+            forward_chain(rules, data)
         elif res == 'b' or res == 'backward' or res == 'backward chaining':
-            break
+            pass
+
+        print('====================================================')
+        input('Press enter to restart')
