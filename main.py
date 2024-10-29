@@ -1,14 +1,15 @@
 from generator import *
-from utils import *
 
+solver = SudokuSolver()
 generator = SudokuGenerator()
-sudoku = SudokuSolver()
-sudoku.load_grid(generator.next())
+grid1 = generator.next()
+solver.load_grid(grid1)
+# solver.load_file('input.txt')
+solver.print()
+print('===========================================')
 
-if sudoku.is_valid():
-    sudoku.print()
-    print('==============================')
-    if sudoku.solve_backtracking():
-        sudoku.print()
+if solver.solve_constraint_propagation_heuristic():
+    solver.print()
+    # print(solver.test_from_file('test.txt'))
 else:
-    print('Invalid grid')
+    print('Can\'t solve')

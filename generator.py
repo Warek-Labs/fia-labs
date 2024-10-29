@@ -1,7 +1,6 @@
 import random
-from typing import List, Optional
 
-from utils import *
+from sudoku import *
 
 GRID_SIZE = 9
 SUBGRID_SIZE = 3

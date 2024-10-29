@@ -1,5 +1,6 @@
+from collections import deque
 from collections.abc import Callable
-from typing import Tuple
+from typing import Tuple, Optional
 import copy
 
 GRID_SIZE = 9
@@ -7,7 +8,7 @@ MIN_VALUE = 1
 MAX_VALUE = GRID_SIZE
 SUBGRID_SIZE = int(GRID_SIZE ** 0.5)
 MIN_CLUES = 17
-Grid = list[list[int | None]]
+Grid = list[list[Optional[int]]]
 DomainsGrid = list[list[set[int]]]
 
 
@@ -20,20 +21,23 @@ class SudokuSolver:
         self._domains = []
 
     def load_file(self, filename: str):
+        """Load grid from a file."""
         self.grid = self.parse_file(filename)
         self.init()
 
     def load_grid(self, ls: Grid):
+        """Load grid from an existing array."""
         self.grid = ls
         self.init()
 
     def init(self):
+        """Tasks to do when loading grid."""
         self._domains = []
         self._compute_all_domains()
 
     @staticmethod
     def parse_file(filename: str) -> Grid:
-        """Load the unsolved grid from a file"""
+        """Load the unsolved grid from a file."""
         grid: Grid = []
 
         with open(filename, 'r') as file:
@@ -97,9 +101,20 @@ class SudokuSolver:
         """Try to solve the grid using backtracking and return the success"""
         return self._solve_backtracking(0, 0)
 
+    def solve_ac3_with_backtracking(self) -> bool:
+        """Solve the grid using AC-3 for initial constraint propagation, followed by backtracking."""
+        if not self._ac3():
+            return False
+
+        return self._solve_backtracking_with_constraint_propagation(0, 0)
+
     def solve_constraint_propagation(self) -> bool:
         """Try to solve the grid using constraint propagation and return the success"""
         return self._solve_constraint_propagation()
+
+    def solve_constraint_propagation_heuristic(self) -> bool:
+        """Try to solve the grid using constraint propagation and return the success"""
+        return self._solve_backtracking_with_constraint_propagation_heuristic()
 
     @staticmethod
     def _get_subgrid_offsets(row: int, col: int) -> Tuple[int, int]:
@@ -134,6 +149,7 @@ class SudokuSolver:
                 self._update_cell_domain(row, col)
 
     def _update_cell_domain(self, row: int, col: int) -> None:
+        """Update _domains for a single cell."""
         if self.grid[row][col] is not None:
             self._clear_cell_domain(row, col)
             return
@@ -144,9 +160,11 @@ class SudokuSolver:
         self._update_cell_subgrid_domain(domain, row, col)
 
     def _clear_cell_domain(self, row: int, col: int) -> None:
+        """Mark cell domain as empty (either can't have values or is already used)."""
         self._domains[row][col] = set()
 
     def _update_cell_row_domain(self, domain: set[int], row: int) -> None:
+        """Update domain based on constraints of neighbors on row."""
         for col in range(GRID_SIZE):
             c = self.grid[row][col]
 
@@ -154,6 +172,7 @@ class SudokuSolver:
                 domain.remove(c)
 
     def _update_cell_col_domain(self, domain: set[int], col: int) -> None:
+        """Update domain based on constraints of neighbors on column."""
         for row in range(GRID_SIZE):
             c = self.grid[row][col]
 
@@ -161,6 +180,7 @@ class SudokuSolver:
                 domain.remove(c)
 
     def _update_cell_subgrid_domain(self, domain: set[int], row: int, col: int) -> None:
+        """Update domain based on constraints of neighbors on the same subgrid."""
         def subgrid_cb(row: int, col: int, value: int) -> None:
             if value in domain:
                 domain.remove(value)
@@ -185,14 +205,18 @@ class SudokuSolver:
         self._forward_propagate_subgrid(row, col)
 
     def _forward_propagate_row(self, row: int) -> None:
+        """Propagate domain constraints to cells on the same row."""
+
         for col in range(GRID_SIZE):
             self._update_cell_domain(row, col)
 
     def _forward_propagate_col(self, col: int) -> None:
+        """Propagate domain constraints to cells on the same column."""
         for row in range(GRID_SIZE):
             self._update_cell_domain(row, col)
 
     def _forward_propagate_subgrid(self, row: int, col: int) -> None:
+        """Propagate domain constraints to cells on the same subgrid."""
         def cb(row: int, col: int, value: int) -> None:
             self._update_cell_domain(row, col)
 
@@ -204,7 +228,7 @@ class SudokuSolver:
                 and self._is_valid_col(col, value)
                 and self._is_valid_subgrid(row, col, value))
 
-    def _is_valid_row(self, row: int, check_value: int | None = None) -> bool:
+    def _is_valid_row(self, row: int, check_value: Optional[int] = None) -> bool:
         """Check the rules on X"""
         visited: set[int] = { check_value }
 
@@ -221,7 +245,7 @@ class SudokuSolver:
 
         return True
 
-    def _is_valid_col(self, col: int, check_value: int | None = None) -> bool:
+    def _is_valid_col(self, col: int, check_value: Optional[int] = None) -> bool:
         """Check the rules on Y"""
         visited: set[int] = { check_value }
 
@@ -238,8 +262,8 @@ class SudokuSolver:
 
         return True
 
-    def _is_valid_subgrid(self, subgrid_row: int, subgrid_col: int, check_value: int | None = None) -> bool:
-        """Check the rules for a subgrid"""
+    def _is_valid_subgrid(self, subgrid_row: int, subgrid_col: int, check_value: Optional[int] = None) -> bool:
+        """Check the rules for a subgrid."""
         visited: set[int] = { check_value }
 
         row_offset, col_offset = self._get_subgrid_offsets(subgrid_row, subgrid_col)
@@ -261,6 +285,7 @@ class SudokuSolver:
         return True
 
     def _solve_backtracking(self, row: int, col: int) -> bool:
+        """Simple backtracking implementation."""
         if row == GRID_SIZE - 1 and col == GRID_SIZE:
             return True
 
@@ -283,6 +308,7 @@ class SudokuSolver:
         return False
 
     def _solve_backtracking_with_constraint_propagation(self, row: int, col: int) -> bool:
+        """Backtracking with forward propagation for the domains of cells."""
         if row == GRID_SIZE - 1 and col == GRID_SIZE:
             return True
 
@@ -309,7 +335,7 @@ class SudokuSolver:
         return False
 
     def _solve_constraint_propagation(self) -> bool:
-        """Constraint propagation approach"""
+        """Constraint propagation approach, pickes the values that are unique in domain of cells and proceeds to simple bakctracking."""
         progress_made = True
 
         while progress_made:
@@ -333,3 +359,100 @@ class SudokuSolver:
 
         # fallback to backtracking
         return self._solve_backtracking_with_constraint_propagation(0, 0)
+
+    def _find_cell_with_least_domains(self) -> Optional[Tuple[int, int]]:
+        """Find the cell with the fewest domain options available."""
+        min_domain_size: int = MAX_VALUE
+        cell_with_least_domains: Optional[Tuple[int, int]] = None
+
+        for row in range(GRID_SIZE):
+            for col in range(GRID_SIZE):
+                if self.grid[row][col] is None:
+                    domain_size = len(self._domains[row][col])
+
+                    if 0 < domain_size < min_domain_size:
+                        min_domain_size = domain_size
+                        cell_with_least_domains = (row, col)
+
+        return cell_with_least_domains
+
+    def _solve_backtracking_with_constraint_propagation_heuristic(self) -> bool:
+        """Solve using backtracking with constraint propagation and selecting cells with the fewest domains first."""
+        cell = self._find_cell_with_least_domains()
+        if cell is None:
+            return True
+
+        row, col = cell
+        domains_snapshot = copy.deepcopy(self._domains)
+
+        for value in self._domains[row][col]:
+            if self._can_place(row, col, value):
+                self.grid[row][col] = value
+                self._forward_propagate(row, col)
+
+                if self._solve_backtracking_with_constraint_propagation_heuristic():
+                    return True
+
+                self.grid[row][col] = None
+                self._domains = domains_snapshot
+
+        return False
+
+    def _ac3(self) -> bool:
+        """Enforce arc consistency on the grid."""
+        queue = deque()
+
+        for row in range(GRID_SIZE):
+            for col in range(GRID_SIZE):
+                if self.grid[row][col] is None:
+                    neighbors = self._get_neighbors(row, col)
+                    for neighbor in neighbors:
+                        queue.append(((row, col), neighbor))
+
+        while queue:
+            (x1, y1), (x2, y2) = queue.popleft()
+
+            if self._revise(x1, y1, x2, y2):
+                if len(self._domains[x1][y1]) == 0:
+                    return False
+
+                neighbors = self._get_neighbors(x1, y1)
+                for neighbor in neighbors:
+                    if neighbor != (x2, y2):
+                        queue.append(((x1, y1), neighbor))
+
+        return True
+
+    def _revise(self, x1: int, y1: int, x2: int, y2: int) -> bool:
+        """Revise the domain of cell (x1, y1) to satisfy arc consistency with cell (x2, y2)."""
+        revised = False
+        domain_x1 = self._domains[x1][y1]
+        domain_x2 = self._domains[x2][y2]
+
+        for value in set(domain_x1):
+            if len(domain_x2) == 1 and value in domain_x2:
+                domain_x1.remove(value)
+                revised = True
+
+        return revised
+
+    def _get_neighbors(self, row: int, col: int) -> list[Tuple[int, int]]:
+        """Get all neighboring cells in the same row, column, and subgrid."""
+        neighbors = set()
+
+        for c in range(GRID_SIZE):
+            if c != col:
+                neighbors.add((row, c))
+
+        for r in range(GRID_SIZE):
+            if r != row:
+                neighbors.add((r, col))
+
+        subgrid_row, subgrid_col = self._get_subgrid_offsets(row, col)
+        for i in range(SUBGRID_SIZE):
+            for j in range(SUBGRID_SIZE):
+                r, c = subgrid_row + i, subgrid_col + j
+                if (r, c) != (row, col):
+                    neighbors.add((r, c))
+
+        return list(neighbors)
