@@ -1,0 +1,922 @@
+[
+    {
+        "tag": "greeting",
+        "patterns": [
+            "Hi",
+            "Hey",
+            "How are you",
+            "Is anyone there?",
+            "Hello",
+            "Good day"
+        ],
+        "responses": [
+            "Hello",
+            "Hi",
+            "Good day",
+            "Welcome",
+            "Hiii",
+            ";-D"
+        ]
+    },
+    {
+        "tag": "goodbye",
+        "patterns": [
+            "Bye",
+            "See you later",
+            "Goodbye"
+        ],
+        "responses": [
+            "See you later, thanks for visiting",
+            "Have a nice day",
+            "Bye! Come back again soon."
+        ]
+    },
+    {
+        "tag": "thanks",
+        "patterns": [
+            "Thanks",
+            "Thank you",
+            "That's helpful"
+        ],
+        "responses": [
+            "Happy to help!",
+            "Any time!",
+            "My pleasure"
+        ]
+    },
+    {
+        "tag": "hours",
+        "patterns": [
+            "What hours are you open?",
+            "What are your hours?",
+            "When are you open?"
+        ],
+        "responses": [
+            "We're open every day 9am-9pm",
+            "Our hours are 9am-9pm every day"
+        ]
+    },
+    {
+        "tag": "mopeds",
+        "patterns": [
+            "Which mopeds do you have?",
+            "What kinds of mopeds are there?",
+            "What do you rent?"
+        ],
+        "responses": [
+            "We rent Yamaha, Piaggio and Vespa mopeds",
+            "We have Piaggio, Vespa and Yamaha mopeds"
+        ]
+    },
+    {
+        "tag": "payments",
+        "patterns": [
+            "Do you take credit cards?",
+            "Do you accept Mastercard?",
+            "Are you cash only?"
+        ],
+        "responses": [
+            "We accept VISA, Mastercard and AMEX",
+            "We accept most major credit cards"
+        ]
+    },
+    {
+        "tag": "opentoday",
+        "patterns": [
+            "Are you open today?",
+            "When do you open today?",
+            "What are your hours today?"
+        ],
+        "responses": [
+            "We're open every day from 9am-9pm",
+            "Our hours are 9am-9pm every day"
+        ]
+    },
+    {
+        "tag": "rental",
+        "patterns": [
+            "Can we rent a moped?",
+            "I'd like to rent a moped",
+            "How does this work?"
+        ],
+        "responses": [
+            "Are you looking to rent today or later this week?"
+        ],
+        "context_set": "rentalday"
+    },
+    {
+        "tag": "today",
+        "patterns": [
+            "today"
+        ],
+        "responses": [
+            "For rentals today please call 1-800-MYMOPED",
+            "Same-day rentals please call 1-800-MYMOPED"
+        ],
+        "context_filter": "rentalday"
+    },
+    {
+        "tag": "tourism_attractions",
+        "patterns": [
+            "What are the top tourist attractions in Moldova?",
+            "Where can I go in Moldova?",
+            "What places are in Moldova?",
+            "What are the must-see places in Moldova?",
+            "What is there to see in Moldova?",
+            "What are popular tourist spots in Moldova?",
+            "What are the best destinations in Moldova?",
+            "What historical landmarks can I visit in Moldova?",
+            "Can you suggest tourist spots in Moldova?",
+            "Are there any natural attractions in Moldova?"
+        ],
+        "responses": [
+            "Moldova offers beautiful natural sites, historic monuments, and wine regions like Cricova Winery.",
+            "Popular attractions include Orheiul Vechi, the Stefan Cel Mare Park, and the wineries.",
+            "Don't miss visiting Soroca Fortress, Tipova Monastery, and the Codrii Forest Reserve.",
+            "The Milestii Mici wine cellar, a UNESCO heritage site, is also a must-see for wine enthusiasts."
+        ]
+    },
+    {
+        "tag": "tourism_info",
+        "patterns": [
+            "Can you tell me about tourism in Moldova?",
+            "Tell me about tourism",
+            "How is the tourism industry in Moldova?",
+            "What is the tourism like in Moldova?",
+            "Is Moldova a popular tourist destination?",
+            "What makes Moldova unique for tourists?",
+            "Why should I visit Moldova?",
+            "Is Moldova worth visiting?",
+            "What can I expect as a tourist in Moldova?",
+            "How developed is the tourism infrastructure in Moldova?"
+        ],
+        "responses": [
+            "Moldova is a growing destination for tourists, with a rich cultural history, wine tours, and scenic landscapes.",
+            "Though less known internationally, Moldova offers authentic travel experiences, especially for wine lovers and history buffs.",
+            "Tourism in Moldova focuses on its unspoiled countryside, traditional villages, and unique winemaking culture.",
+            "Moldova is ideal for travelers seeking off-the-beaten-path experiences and cultural immersion.",
+            "With its friendly locals and emerging tourist facilities, Moldova is becoming an attractive destination in Eastern Europe."
+        ]
+    },
+    {
+        "tag": "tourism_best_time",
+        "patterns": [
+            "When is the best time to visit Moldova?",
+            "What is the ideal season for visiting Moldova?",
+            "Is it better to visit Moldova in the summer or winter?",
+            "When does Moldova have the best weather?",
+            "What is the peak tourist season in Moldova?",
+            "Should I visit Moldova in spring or fall?",
+            "When can I experience Moldova's wine festivals?"
+        ],
+        "responses": [
+            "Spring and early fall are ideal for visiting Moldova due to pleasant weather.",
+            "Summer is warm, while winter is perfect for those interested in snow activities.",
+            "Autumn is especially beautiful with vineyard tours and wine festivals.",
+            "April to June and September to October are the best months for mild weather and fewer crowds."
+        ]
+    },
+    {
+        "tag": "tourism_food",
+        "patterns": [
+            "What food should I try in Moldova?",
+            "What are traditional Moldovan dishes?",
+            "What is Moldovan cuisine like?",
+            "What food is popular in Moldova?",
+            "What are the famous dishes of Moldova?",
+            "Can you suggest some Moldovan specialties?",
+            "What drinks are famous in Moldova?",
+            "Is Moldovan wine worth trying?"
+        ],
+        "responses": [
+            "Moldova is known for dishes like Mămăligă, Sarmale, and Plăcinte.",
+            "Try the local wine and traditional meals like meat stews, soups, and cheese-filled pastries.",
+            "Don't miss out on Zeama, a traditional chicken soup, and Răcituri, a type of meat jelly.",
+            "Moldovan wine is world-famous, and you should try Cricova or Purcari wines.",
+            "Desserts like Cozonac and sweet Plăcinte are also a must-try for those with a sweet tooth."
+        ]
+    },
+    {
+        "tag": "tourism_culture",
+        "patterns": [
+            "What is the culture of Moldova?",
+            "What are the cultural traditions in Moldova?",
+            "Can you tell me about Moldova's culture?",
+            "What should I know about Moldovan customs?",
+            "What are the main festivals in Moldova?",
+            "How is Moldova's cultural heritage preserved?",
+            "What kind of music is popular in Moldova?",
+            "What influences Moldovan culture?"
+        ],
+        "responses": [
+            "Moldova has rich traditions in music, dance, and folklore. The people celebrate various festivals throughout the year.",
+            "Moldovan culture is influenced by Romanian, Russian, and Turkish traditions, with a strong emphasis on hospitality and family.",
+            "Traditional Moldovan music includes folk instruments like the nai and cimbalom, often played during celebrations.",
+            "Key festivals include the Martisor Festival in spring and the Wine Festival in autumn.",
+            "Art and crafts, such as embroidery and pottery, are significant elements of Moldovan heritage."
+        ]
+    },
+    {
+        "tag": "tourism_accommodation",
+        "patterns": [
+            "Where can I stay in Moldova?",
+            "What are the best hotels in Moldova?",
+            "Are there any good hostels in Moldova?",
+            "What type of accommodation is available in Moldova?",
+            "Are there budget-friendly places to stay in Moldova?",
+            "Can I find luxury hotels in Moldova?",
+            "Are there rural guesthouses in Moldova?",
+            "What are the top-rated accommodations in Chisinau?"
+        ],
+        "responses": [
+            "Moldova offers a range of accommodations, from luxury hotels to guesthouses and hostels.",
+            "Popular cities like Chisinau have both modern hotels and more traditional stays in rural areas.",
+            "For a unique experience, stay at a vineyard guesthouse or boutique hotel in the wine regions.",
+            "Budget travelers can find affordable hostels and mid-range hotels in most towns."
+        ]
+    },
+    {
+        "tag": "tourism_transportation",
+        "patterns": [
+            "How do I get around in Moldova?",
+            "What transportation options are available in Moldova?",
+            "Is it easy to travel around Moldova?",
+            "Can I rent a car in Moldova?",
+            "Are there public buses in Moldova?",
+            "What is the best way to travel within Moldova?",
+            "Does Moldova have a train network?",
+            "How is public transportation in Moldova?"
+        ],
+        "responses": [
+            "You can travel around Moldova by bus, taxi, or rental car. There are also train services between major cities.",
+            "Chisinau has an international airport, and taxis or public transport are readily available.",
+            "Minibuses, locally known as 'marshrutkas,' are a popular and inexpensive way to get around Moldova.",
+            "Car rentals are available in Chisinau and are ideal for exploring rural areas at your own pace."
+        ]
+    },
+    {
+        "tag": "tourism_nature",
+        "patterns": [
+            "What natural attractions are there in Moldova?",
+            "Where can I go for nature walks in Moldova?",
+            "What are the most beautiful landscapes in Moldova?",
+            "Are there any national parks in Moldova?",
+            "What are Moldova's top outdoor destinations?",
+            "Can I hike in Moldova?",
+            "What rivers or lakes can I visit in Moldova?",
+            "What are the best spots for birdwatching in Moldova?"
+        ],
+        "responses": [
+            "Moldova is home to beautiful landscapes, including forests, lakes, and vineyards. Visit places like Orheiul Vechi, a historic complex with stunning views.",
+            "The Codru Forest and the Danube River are popular for nature walks and outdoor activities.",
+            "For hiking and exploration, Tipova Monastery and Saharna Monastery offer picturesque settings.",
+            "Nature reserves like Padurea Domneasca are excellent for birdwatching and wildlife enthusiasts."
+        ]
+    },
+    {
+        "tag": "tourism_history",
+        "patterns": [
+            "What historical sites can I visit in Moldova?",
+            "Tell me about Moldova's history.",
+            "What are the most famous historical landmarks in Moldova?",
+            "Does Moldova have any castles or ruins?",
+            "Are there any UNESCO World Heritage sites in Moldova?",
+            "What ancient monuments are in Moldova?",
+            "Can I learn about Soviet history in Moldova?",
+            "What are Moldova's key historical periods?"
+        ],
+        "responses": [
+            "Moldova has a rich history with several key sites like the Orheiul Vechi archaeological complex, the Stefan Cel Mare Park, and the Bender Fortress.",
+            "Moldova is also known for its ancient monasteries, including the Căpriana Monastery.",
+            "Don't miss Soroca Fortress and the National Museum of History in Chisinau for a glimpse into Moldova's past.",
+            "The country offers insights into its Soviet history, with landmarks and museums dedicated to this period."
+        ]
+    },
+    {
+        "tag": "tourism_shopping",
+        "patterns": [
+            "What can I buy in Moldova?",
+            "Are there shopping malls in Moldova?",
+            "What souvenirs should I bring back from Moldova?",
+            "Where can I shop in Chisinau?",
+            "What are the best markets in Moldova?",
+            "Does Moldova have local artisan crafts?",
+            "What is Moldova famous for in terms of shopping?",
+            "Can I buy wine directly from Moldovan wineries?"
+        ],
+        "responses": [
+            "Moldova is known for its wine, hand-made crafts, and traditional pottery. You can also buy local textiles and wooden items.",
+            "Chisinau has various shopping malls, markets, and souvenir shops for all types of goods.",
+            "For authentic souvenirs, check out local markets for embroidered tablecloths, hand-carved wooden items, and ceramics.",
+            "Many wineries in Moldova offer wine for direct purchase, making it a perfect gift or keepsake."
+        ]
+    },
+    {
+        "tag": "tourism_safety",
+        "patterns": [
+            "Is Moldova safe for tourists?",
+            "How safe is it to travel in Moldova?",
+            "What precautions should I take while traveling in Moldova?",
+            "Is there any crime in Moldova?",
+            "Are there any unsafe areas in Moldova?",
+            "How is the local law enforcement in Moldova?",
+            "What should I know about personal safety in Moldova?",
+            "Is public transport safe in Moldova?"
+        ],
+        "responses": [
+            "Moldova is generally a safe country for tourists. However, like any other destination, it's good to be cautious with your belongings.",
+            "It's advised to avoid isolated areas at night and be aware of your surroundings, especially in crowded places.",
+            "Pickpocketing can occur in busy areas, so it's best to keep valuables secure and be mindful of your belongings.",
+            "Local law enforcement is approachable, and major cities have tourist information centers for assistance."
+        ]
+    },
+    {
+        "tag": "tourism_events",
+        "patterns": [
+            "What events happen in Moldova?",
+            "Are there any annual festivals in Moldova?",
+            "What events should I attend in Moldova?"
+        ],
+        "responses": [
+            "Moldova hosts several annual events such as the National Wine Day, the Moldovan Opera Festival, and the International Theatre Festival.",
+            "You can also experience local celebrations like the Martisor Festival, celebrating the arrival of spring."
+        ]
+    },
+    {
+        "tag": "tourism_healthcare",
+        "patterns": [
+            "What healthcare options are available for tourists in Moldova?",
+            "Is healthcare in Moldova good for tourists?",
+            "Should I have travel insurance for Moldova?"
+        ],
+        "responses": [
+            "Moldova has a number of healthcare facilities in major cities, but it’s recommended to have travel insurance that covers medical expenses.",
+            "Private healthcare is available, and you can also find pharmacies in most areas."
+        ]
+    },
+    {
+        "tag": "tourism_adventure",
+        "patterns": [
+            "What adventure activities can I do in Moldova?",
+            "Is Moldova good for hiking or cycling?",
+            "Can I do extreme sports in Moldova?"
+        ],
+        "responses": [
+            "Moldova offers great opportunities for hiking, especially in the Codru Forest and around Orheiul Vechi.",
+            "You can also enjoy cycling through the picturesque countryside and try wine-tasting tours."
+        ]
+    },
+    {
+        "tag": "tourism_photography",
+        "patterns": [
+            "What are the best places for photography in Moldova?",
+            "Where can I take scenic photos in Moldova?",
+            "What are the most photogenic places in Moldova?"
+        ],
+        "responses": [
+            "Moldova has stunning natural landscapes perfect for photography, such as the Dniester River, the Orheiul Vechi monastery, and Cricova Winery.",
+            "Chisinau's Stefan Cel Mare Park and the medieval Bender Fortress also offer great photo opportunities."
+        ]
+    },
+    {
+        "tag": "tourism_local_experiences",
+        "patterns": [
+            "What local experiences should I try in Moldova?",
+            "What is something unique to do in Moldova?",
+            "What can I do in Moldova that I can't do anywhere else?"
+        ],
+        "responses": [
+            "You can visit a traditional Moldovan wine cellar, try your hand at making Plăcinte (Moldovan pies), or explore rural villages to experience authentic hospitality.",
+            "Attending a local folk music performance or taking part in a traditional feast are also unique experiences."
+        ]
+    },
+    {
+        "tag": "chisinau_attractions",
+        "patterns": [
+            "What are the top attractions in Chisinau?",
+            "What should I see in Chisinau?",
+            "What are some famous landmarks in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau is known for its beautiful parks, such as Stefan Cel Mare Park, the National Museum of History, and the Cathedral Park. You can also visit the Chisinau Botanical Garden and the Triumphal Arch.",
+            "For a taste of local history and culture, check out the National Art Museum and the Stefan Cel Mare statue."
+        ]
+    },
+    {
+        "tag": "chisinau_food",
+        "patterns": [
+            "What food should I try in Chisinau?",
+            "Where can I eat in Chisinau?",
+            "What is the local cuisine like in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau offers a mix of traditional Moldovan cuisine and modern eateries. Try local dishes like Mămăligă, Sarmale, and Plăcinte. There are many restaurants and cafes in the city, including places serving international food.",
+            "For a local experience, visit the Piata Centrală market for fresh, homemade products and local delicacies."
+        ]
+    },
+    {
+        "tag": "chisinau_nightlife",
+        "patterns": [
+            "What is the nightlife like in Chisinau?",
+            "Where can I go out in Chisinau?",
+            "Are there any clubs or bars in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau has a vibrant nightlife scene with a variety of bars, nightclubs, and live music venues. Popular spots include the La Soi restaurant and the Sky Bar.",
+            "You can enjoy a lively atmosphere at the numerous clubs and bars in the city center, especially in the weekend evenings."
+        ]
+    },
+    {
+        "tag": "chisinau_shopping",
+        "patterns": [
+            "Where can I shop in Chisinau?",
+            "Are there shopping malls in Chisinau?",
+            "What are the best shopping areas in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau offers a mix of shopping centers and local markets. Shopping malls like MallDova and Sun City have a variety of stores, while the Central Market offers handmade crafts and local goods.",
+            "For local products, you can visit the Piata Centrala, where you can find souvenirs and traditional Moldovan items."
+        ]
+    },
+    {
+        "tag": "chisinau_parks",
+        "patterns": [
+            "What parks are there in Chisinau?",
+            "Can you recommend some parks in Chisinau?",
+            "Where can I enjoy nature in Chisinau?",
+            "Which are the best parks in Chisinau?",
+            "Are there any parks for picnics in Chisinau?",
+            "What are some family-friendly parks in Chisinau?",
+            "Can I find green spaces in Chisinau?",
+            "Where can I go jogging in Chisinau?",
+            "Are there any parks with lakes in Chisinau?",
+            "Where can I find a peaceful park in Chisinau?",
+            "Which parks in Chisinau are good for walking?",
+            "What are the most popular parks in Chisinau?",
+            "Where can I take kids to play in Chisinau?",
+            "Are there any parks with playgrounds in Chisinau?",
+            "Can I visit nature reserves or gardens in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau has several beautiful parks, including the Stefan Cel Mare Park, Valea Morilor Park, and Dendrarium Park.",
+            "Stefan Cel Mare Park is the largest and most popular park, offering walking paths, lakes, and green spaces.",
+            "Valea Morilor Park is known for its stunning lake and opportunities for boating or relaxing by the water.",
+            "Dendrarium Park is a peaceful spot, perfect for nature lovers and those seeking a quiet retreat."
+        ]
+    },
+    {
+        "tag": "chisinau_museums",
+        "patterns": [
+            "What museums are there in Chisinau?",
+            "Can you tell me about museums in Chisinau?",
+            "What is there to see in the museums of Chisinau?",
+            "What are the best museums to visit in Chisinau?",
+            "Are there any art museums in Chisinau?",
+            "Where can I learn about Moldovan history in Chisinau?",
+            "Which museum in Chisinau is good for families?",
+            "What museums can I find in Chisinau?",
+            "Are there any science or natural history museums in Chisinau?",
+            "Can you recommend a museum to visit in Chisinau?",
+            "Which museums in Chisinau have the best exhibitions?",
+            "Are there any free museums in Chisinau?",
+            "What are the most popular museums in Chisinau?",
+            "Is the National Museum of History worth visiting in Chisinau?",
+            "What can I see at the Museum of Ethnography in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau is home to several museums such as the National Museum of History of Moldova, the Stefan Cel Mare Park Museum, and the National Art Museum.",
+            "For history and culture, you can visit the Museum of Ethnography and Natural History, which is one of the oldest museums in Moldova.",
+            "Art enthusiasts can explore the National Art Museum, which features a collection of Moldovan and international art.",
+            "If you're interested in natural history, the Museum of Ethnography and Natural History is a must-visit, showcasing exhibits about Moldovan flora, fauna, and traditions."
+        ]
+    },
+    {
+        "tag": "regions_in_moldova",
+        "patterns": [
+            "How many regions are there in Moldova?",
+            "What are the regions of Moldova?",
+            "How many administrative regions are in Moldova?"
+        ],
+        "responses": [
+            "Moldova is divided into 32 districts, plus the autonomous territorial unit of Gagauzia and the capital city, Chisinau."
+        ]
+    },
+    {
+        "tag": "chisinau_regions",
+        "patterns": [
+            "What regions are there in Chisinau?",
+            "What are the districts of Chisinau?",
+            "Can you tell me about the regions in Chisinau?"
+        ],
+        "responses": [
+            "Chisinau is divided into several sectors, including Buiucani, Centru, Botanica, Riscani, and others."
+        ]
+    },
+    {
+        "tag": "population_moldova",
+        "patterns": [
+            "What is the population of Moldova?",
+            "How many people live in Moldova?",
+            "Can you tell me the population of Moldova?"
+        ],
+        "responses": [
+            "The population of Moldova is approximately 2.6 million people."
+        ]
+    },
+    {
+        "tag": "population_chisinau",
+        "patterns": [
+            "What is the population of Chisinau?",
+            "How many people live in Chisinau?",
+            "Can you tell me the population of Chisinau?",
+            "How many people are there in Chisinau?",
+            "What is the current population of Chisinau?",
+            "Is Chisinau the largest city in Moldova by population?",
+            "How does the population of Chisinau compare to other cities in Moldova?"
+        ],
+        "responses": [
+            "Chisinau has a population of around 700,000 people.",
+            "As the largest city in Moldova, Chisinau is home to approximately 700,000 residents, making it the country's economic and cultural hub."
+        ]
+    },
+    {
+        "tag": "capital_moldova",
+        "patterns": [
+            "What is the capital of Moldova?",
+            "What is the capital of Republic of Moldova?",
+            "What is the capital?",
+            "What capital does Moldova have?",
+            "Tell me what is the capital of Moldova?",
+            "Can you tell me the capital of Moldova?",
+            "Is Chisinau the capital of Moldova?",
+            "Which city is the capital of Moldova?"
+        ],
+        "responses": [
+            "Chisinau is the capital of Moldova.",
+            "The capital of Moldova is Chisinau, which is also the largest city in the country."
+        ]
+    },
+    {
+        "tag": "area_moldova",
+        "patterns": [
+            "What is the area of Moldova?",
+            "How big is Moldova?",
+            "Can you tell me the size of Moldova?",
+            "What is the total area of Moldova?",
+            "How large is the territory of Moldova?",
+            "What is the land area of Moldova?",
+            "How much land does Moldova cover?"
+        ],
+        "responses": [
+            "Moldova covers an area of about 33,846 square kilometers.",
+            "The total area of Moldova is approximately 33,846 square kilometers, making it a small but charming country in Eastern Europe."
+        ]
+    },
+    {
+        "tag": "airports_moldova",
+        "patterns": [
+            "What airports are there in Moldova?",
+            "Which airports serve Moldova?",
+            "Can you tell me the airports in Moldova?"
+        ],
+        "responses": [
+            "Moldova's main international airport is Chisinau International Airport. Other smaller airports include Bălți-Leadoveni and Tiraspol Airport."
+        ]
+    },
+    {
+        "tag": "languages_moldova",
+        "patterns": [
+            "What languages are spoken in Moldova?",
+            "What is the official language of Moldova?",
+            "Which languages are commonly used in Moldova?",
+            "Do people in Moldova speak English?",
+            "Is Russian widely spoken in Moldova?",
+            "What minority languages are spoken in Moldova?",
+            "Can I get by with English in Moldova?"
+        ],
+        "responses": [
+            "The official language of Moldova is Romanian. Russian is also widely spoken, especially in the breakaway region of Transnistria. Gagauz and Bulgarian are spoken by some minority groups.",
+            "In urban areas, English is understood by younger generations, but Romanian and Russian are the most commonly spoken languages."
+        ]
+    },
+    {
+        "tag": "rivers_moldova",
+        "patterns": [
+            "What rivers are in Moldova?",
+            "Can you tell me about the rivers in Moldova?",
+            "What are the major rivers of Moldova?",
+            "Is the Dniester River important in Moldova?",
+            "What role do rivers play in Moldova's geography?",
+            "Are there any rivers for kayaking or boating in Moldova?",
+            "What is the most famous river in Moldova?"
+        ],
+        "responses": [
+            "Moldova is home to several major rivers, including the Dniester River, Prut River, and the Bâc River. These rivers play a significant role in Moldova's natural landscape.",
+            "The Dniester River is the largest and most significant, serving as a source of water, recreation, and border delineation in some areas."
+        ]
+    },
+    {
+        "tag": "lakes_moldova",
+        "patterns": [
+            "What are the biggest lakes in Moldova?",
+            "Can you tell me about the lakes in Moldova?",
+            "Which lakes are the largest in Moldova?",
+            "Are there any recreational lakes in Moldova?",
+            "What is Lake Beleu known for?",
+            "Are there any natural lakes in Moldova?",
+            "Can I visit any lakes for birdwatching in Moldova?"
+        ],
+        "responses": [
+            "The largest lakes in Moldova include Lake Sălcuța, Lake Beleu, and Lake Manta. These lakes are important for local biodiversity and recreational activities.",
+            "Lake Beleu, part of the Lower Prut Biosphere Reserve, is a popular spot for birdwatching and eco-tourism."
+        ]
+    },
+    {
+        "tag": "moldova_history",
+        "patterns": [
+            "Tell me about the history of Moldova",
+            "What are some key historical events in Moldova?",
+            "When did Moldova gain independence?"
+        ],
+        "responses": [
+            "Moldova's history dates back to ancient times, including periods under the Roman and Ottoman empires. It gained independence from the Soviet Union in 1991.",
+            "Key historical events include the formation of the Principality of Moldova in the 14th century and its modern struggles with independence and political identity."
+        ]
+    },
+    {
+        "tag": "moldova_climate",
+        "patterns": [
+            "What is the climate like in Moldova?",
+            "What’s the weather like in Moldova during the summer?",
+            "When is the best time to visit Moldova based on weather?"
+        ],
+        "responses": [
+            "Moldova has a temperate continental climate, with hot summers and cold winters. The best time to visit is spring or early fall when temperatures are mild.",
+            "Summer is hot and dry, while winters are cold with occasional snow."
+        ]
+    },
+    {
+        "tag": "moldova_economy",
+        "patterns": [
+            "What is Moldova's economy based on?",
+            "What are the main industries in Moldova?",
+            "Is Moldova a developing economy?"
+        ],
+        "responses": [
+            "Moldova’s economy is primarily based on agriculture, with wine production being a key industry. The country also has a growing services sector.",
+            "Other key industries include food processing, textiles, and chemicals."
+        ]
+    },
+    {
+        "tag": "moldova_transportation",
+        "patterns": [
+            "How do I travel around Moldova?",
+            "What are the public transport options in Moldova?",
+            "Can I rent a car in Moldova?"
+        ],
+        "responses": [
+            "Moldova has a network of buses and minibuses connecting cities. You can also travel by train between major cities.",
+            "Taxis are available, and rental cars are common for tourists. Chisinau, the capital, has a well-connected transport system."
+        ]
+    },
+    {
+        "tag": "moldova_education",
+        "patterns": [
+            "What are the top universities in Moldova?",
+            "How is the education system in Moldova?",
+            "Are there English-language universities in Moldova?"
+        ],
+        "responses": [
+            "Moldova has several universities, including the Moldova State University and the Academy of Economic Studies.",
+            "Education in Moldova is free and compulsory for children aged 7 to 16. Many universities offer programs in both Romanian and Russian, with some English courses available."
+        ]
+    },
+    {
+        "tag": "moldova_festivals",
+        "patterns": [
+            "What are some popular festivals in Moldova?",
+            "When is National Wine Day celebrated?",
+            "What cultural festivals are in Moldova?"
+        ],
+        "responses": [
+            "Moldova hosts the National Wine Day in October, celebrating the country’s winemaking traditions.",
+            "Other major events include the Moldovan Opera Festival and the International Theatre Festival."
+        ]
+    },
+    {
+        "tag": "moldova_wildlife",
+        "patterns": [
+            "What wildlife can I see in Moldova?",
+            "Are there any rare animals in Moldova?",
+            "What is Moldova’s national animal?"
+        ],
+        "responses": [
+            "Moldova’s wildlife includes animals like deer, wild boars, and various bird species.",
+            "The country is home to diverse plant and animal life, including rare species in its protected forests and nature reserves."
+        ]
+    },
+    {
+        "tag": "moldova_traditions",
+        "patterns": [
+            "What are some Moldovan traditions?",
+            "How do Moldovans celebrate Christmas?",
+            "What is the significance of the Martisor festival?"
+        ],
+        "responses": [
+            "Moldovans celebrate Martisor, a spring festival, by exchanging red-and-white woven bracelets.",
+            "Family plays a central role in Moldovan life, and many holidays revolve around family gatherings and traditional food."
+        ]
+    },
+    {
+        "tag": "tourism_statistics",
+        "patterns": [
+            "How many tourists visit Moldova each year?",
+            "What is the number of tourists in Moldova?",
+            "How many tourists are there in Moldova?"
+        ],
+        "responses": [
+            "Moldova attracts around 150,000 to 200,000 international tourists annually, with a steady increase in tourism due to its cultural heritage and wine tourism.",
+            "Tourism in Moldova is growing, with the country becoming more popular for wine tours and historical exploration."
+        ]
+    },
+    {
+        "tag": "moldova_neighbors",
+        "patterns": [
+            "What countries border Moldova?",
+            "Which countries are neighbors of Moldova?",
+            "What are the neighboring countries of Moldova?"
+        ],
+        "responses": [
+            "Moldova is bordered by Romania to the west, Ukraine to the north, east, and south.",
+            "It has no direct access to the sea, and its borders are landlocked between Romania and Ukraine."
+        ]
+    },
+    {
+        "tag": "moldova_continent",
+        "patterns": [
+            "What continent is Moldova on?",
+            "Moldova is in which continent?",
+            "Where is Moldova located geographically?"
+        ],
+        "responses": [
+            "Moldova is located in Eastern Europe.",
+            "It is part of the continent of Europe and lies between Romania and Ukraine."
+        ]
+    },
+    {
+        "tag": "soroca_fortress",
+        "patterns": [
+            "Tell me about Soroca Fortress.",
+            "What is Cetatea Soroca?",
+            "Can you describe the Soroca Fortress?"
+        ],
+        "responses": [
+            "Soroca Fortress, also known as Cetatea Soroca, is a well-preserved medieval fortress located on the Dniester River. Built in the 15th century by Stephen the Great, it is known for its circular design and strategic importance during Moldova's history.",
+            "Soroca Fortress is a major tourist attraction, offering insights into Moldova's medieval history and stunning views of the Dniester River."
+        ]
+    },
+    {
+        "tag": "tipova_monastery",
+        "patterns": [
+            "What is Tipova Monastery?",
+            "Tell me about Tipova.",
+            "What makes Tipova Monastery special?"
+        ],
+        "responses": [
+            "Tipova Monastery is one of Moldova's oldest monasteries, carved into rocky cliffs along the Dniester River. It dates back to the 11th century and is renowned for its breathtaking natural surroundings and spiritual significance.",
+            "Visitors to Tipova Monastery can explore its ancient caves, scenic views, and peaceful atmosphere."
+        ]
+    },
+    {
+        "tag": "old_orhei",
+        "patterns": [
+            "What is Old Orhei?",
+            "Tell me about Orheiul Vechi.",
+            "Why is Old Orhei famous?"
+        ],
+        "responses": [
+            "Old Orhei (Orheiul Vechi) is an archaeological and cultural complex that features ancient cave monasteries, ruins of medieval cities, and stunning landscapes. It is located in the Raut River valley and represents a blend of natural beauty and historical significance.",
+            "Old Orhei is a must-visit for those interested in Moldova's history and picturesque countryside."
+        ]
+    },
+    {
+        "tag": "cricova_winery",
+        "patterns": [
+            "What is Cricova Winery?",
+            "Tell me about Cricova wine cellars.",
+            "Why is Cricova famous?"
+        ],
+        "responses": [
+            "Cricova Winery is one of Moldova's most renowned wineries, famous for its underground wine cellars that stretch over 120 kilometers. It offers guided tours, wine tastings, and a glimpse into Moldova's winemaking heritage.",
+            "Cricova is not just a winery; it’s a subterranean city of wine and a significant part of Moldova's cultural identity."
+        ]
+    },
+    {
+        "tag": "capriana_monastery",
+        "patterns": [
+            "What is Capriana Monastery?",
+            "Tell me about the Capriana Monastery.",
+            "Why is Capriana Monastery important?"
+        ],
+        "responses": [
+            "Capriana Monastery is a historic Orthodox monastery located near Chisinau. Established in the 15th century, it has served as a spiritual center for Moldova and was once home to the Metropolitan Bishop of Moldova.",
+            "The Capriana Monastery is renowned for its architecture, serene environment, and historical significance."
+        ]
+    },
+    {
+        "tag": "taul_park",
+        "patterns": [
+            "What is Taul Park?",
+            "Tell me about Taul Park.",
+            "Why is Taul Park worth visiting?"
+        ],
+        "responses": [
+            "Taul Park, located near the village of Taul, is the largest dendrological park in Moldova. It features an array of exotic plants, scenic pathways, and a historic manor house. It is a perfect destination for nature lovers.",
+            "Visitors to Taul Park can enjoy peaceful walks through lush greenery and learn about Moldova's botanical diversity."
+        ]
+    },
+    {
+        "tag": "nistru_river",
+        "patterns": [
+            "What is the Nistru River?",
+            "Why is the Dniester River important?",
+            "Tell me about the Dniester River in Moldova."
+        ],
+        "responses": [
+            "The Nistru (Dniester) River is Moldova's largest river, forming part of its border with Ukraine. It offers picturesque views, opportunities for water sports, and fishing. Many historical sites, such as Soroca Fortress, are located along its banks.",
+            "The Nistru River is central to Moldova's ecosystem and provides a natural retreat for locals and tourists alike."
+        ]
+    },
+    {
+        "tag": "milestii_mici",
+        "patterns": [
+            "What is Milestii Mici?",
+            "Tell me about Milestii Mici wine cellars.",
+            "Why is Milestii Mici famous?"
+        ],
+        "responses": [
+            "Milestii Mici is a world-renowned winery in Moldova, recognized by the Guinness World Records for having the largest wine collection. Its underground cellars span over 200 kilometers, offering guided tours and tastings of premium wines.",
+            "Milestii Mici is a must-visit for wine enthusiasts exploring Moldova's rich vinicultural tradition."
+        ]
+    },
+    {
+        "tag": "manuc_bey_mansion",
+        "patterns": [
+            "What is Manuc Bey Mansion?",
+            "Tell me about the Manuc Bey estate.",
+            "Why is Manuc Bey Mansion significant?"
+        ],
+        "responses": [
+            "Manuc Bey Mansion, located in Hincesti, is an elegant 19th-century estate showcasing a mix of Armenian, Ottoman, and European architectural influences. It now functions as a museum and cultural venue.",
+            "Visitors can explore the beautifully restored mansion, gardens, and learn about its fascinating history."
+        ]
+    },
+    {
+        "tag": "vadul_lui_voda",
+        "patterns": [
+            "What is Vadul lui Voda?",
+            "Tell me about Vadul lui Voda.",
+            "Why visit Vadul lui Voda?"
+        ],
+        "responses": [
+            "Vadul lui Voda is a popular resort town on the banks of the Nistru River, known for its sandy beaches and recreational activities. It is a great spot for summer getaways and family vacations.",
+            "Visitors to Vadul lui Voda can enjoy water sports, picnics, and a relaxing atmosphere near the river."
+        ]
+    },
+    {
+        "tag": "curchi_monastery",
+        "patterns": [
+            "What is Curchi Monastery?",
+            "Tell me about the Curchi Monastery.",
+            "Why is Curchi Monastery important?"
+        ],
+        "responses": [
+            "Curchi Monastery is a stunning Orthodox monastery located in the Orhei region. Known for its Baroque and Neoclassical architecture, it is one of the most significant religious sites in Moldova.",
+            "The monastery offers a peaceful retreat and beautiful surroundings for visitors and pilgrims."
+        ]
+    },
+    {
+        "tag": "padurea_domneasca",
+        "patterns": [
+            "What is Padurea Domneasca?",
+            "Tell me about the Royal Forest Reserve.",
+            "Why is Padurea Domneasca worth visiting?"
+        ],
+        "responses": [
+            "Padurea Domneasca is the largest nature reserve in Moldova, located in the Prut River valley. It is home to diverse wildlife, including bison and rare bird species, as well as unique wetlands and old-growth forests.",
+            "Nature enthusiasts will appreciate the reserve’s rich biodiversity and tranquil landscapes."
+        ]
+    },
+    {
+        "tag": "gagauzia",
+        "patterns": [
+            "What is Gagauzia?",
+            "Tell me about Gagauzia.",
+            "What can I see in Gagauzia?"
+        ],
+        "responses": [
+            "Gagauzia is an autonomous region in southern Moldova, known for its unique culture and traditions. Visitors can explore local museums, traditional crafts, and the vibrant Gagauz festivals.",
+            "Gagauzia offers a glimpse into a distinct cultural identity within Moldova, with friendly communities and fascinating history."
+        ]
+    }
+]
