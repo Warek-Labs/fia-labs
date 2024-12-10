@@ -1,4 +1,5 @@
 from model import *
+import random
 
 
 def generate_response(question: str) -> str | None:

@@ -22,6 +22,7 @@ class TelegramBot:
         msg = update.message.text
         chat_id = update.effective_chat.id
 
+        # Failure handling
         try:
             res = generate_response(msg)
             await context.bot.send_message(chat_id=chat_id, text=res)
